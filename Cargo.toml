@@ -1,11 +1,11 @@
 [package]
-name = "docker-api"
-version = "0.14.0"
+name = "rs-docker-api"
+version = "0.1.0"
 authors = ["Wojciech Kępka <wojciech@wkepka.dev"]
 description = "Interface to Docker API"
-documentation = "https://docs.rs/docker-api"
-homepage = "https://github.com/vv9k/docker-api-rs"
-repository = "https://github.com/vv9k/docker-api-rs"
+#documentation = "https://docs.rs/docker-api"
+#homepage = "https://github.com/vv9k/docker-api-rs"
+#repository = "https://github.com/vv9k/docker-api-rs"
 keywords = ["docker"]
 license = "MIT"
 edition = "2021"
@@ -16,8 +16,8 @@ containers-api = "0.9"
 #containers-api = { path = "../containers-api" }
 #containers-api = { git = "https://github.com/vv9k/containers-api" }
 
-#docker-api-stubs = "0.5"
-docker-api-stubs = { path = "./docker-api-stubs/lib" }
+#rs-docker-api-stubs = "0.5"
+rs-docker-api-stubs = { path = "rs-docker-api-stubs/lib", version = "0.6.0" }
 
 log = "0.4"
 paste = "1"

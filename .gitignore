@@ -1,5 +1,5 @@
-docker-api-stubs/build
-docker-api-stubs/lib/target
+rs-docker-api-stubs/build
+rs-docker-api-stubs/lib/target
 .vscode
 .idea
 /target

@@ -1,4 +1,4 @@
-use crate::models::{DeviceRequest, Labels, NetworkingConfig};
+use rs_docker_api_stubs::models::{DeviceRequest, NetworkingConfig};
 use crate::opts::ImageName;
 use containers_api::opts::{Filter, FilterItem};
 use containers_api::{
@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Map, Value};
 
 use crate::{Error, Result};
+use crate::models::Labels;
 
 pub enum Health {
     Starting,

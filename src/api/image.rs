@@ -24,7 +24,7 @@ impl_api_ty!(Image => name);
 
 impl Image {
     impl_api_ep! {img: Image, resp
-        Inspect -> &format!("/images/{}/json", img.name), models::ImageInspect
+        Inspect -> &format!("/images/{}/json", img.name), rs_docker_api_stubs::models::ImageInspect
     }
 
     api_doc! { Image => Delete
@@ -32,7 +32,7 @@ impl Image {
     /// Remove this image with options.
     ///
     /// Use [`delete`](Image::delete) to delete without options.
-    pub async fn remove(&self, opts: &ImageRemoveOpts) -> Result<Vec<models::ImageDeleteResponseItem>> {
+    pub async fn remove(&self, opts: &ImageRemoveOpts) -> Result<Vec<rs_docker_api_stubs::models::ImageDeleteResponseItem>> {
         let ep =
             containers_api::url::construct_ep(format!("/images/{}", self.name), opts.serialize());
         self.docker.delete_json(ep.as_ref()).await
@@ -43,7 +43,7 @@ impl Image {
     /// Delete this image with force.
     ///
     /// Use [`remove`](Image::remove) to delete with options.
-    pub async fn delete(&self) -> Result<Vec<models::ImageDeleteResponseItem>> {
+    pub async fn delete(&self) -> Result<Vec<rs_docker_api_stubs::models::ImageDeleteResponseItem>> {
         self.docker
             .delete_json(&format!("/images/{}", self.name))
             .await
@@ -52,7 +52,7 @@ impl Image {
     api_doc! { Image => History
     |
     /// Lists the history of the images set of changes.
-    pub async fn history(&self) -> Result<models::ImageHistory200Response> {
+    pub async fn history(&self) -> Result<rs_docker_api_stubs::models::ImageHistory200Response> {
         self.docker
             .get_json(&format!("/images/{}/history", self.name))
             .await
@@ -100,7 +100,7 @@ impl Image {
     api_doc! { Distribution => Inspect
     |
     /// Return image digest and platform information by contacting the registry.
-    pub async fn distribution_inspect(&self) -> Result<models::DistributionInspect> {
+    pub async fn distribution_inspect(&self) -> Result<rs_docker_api_stubs::models::DistributionInspect> {
         self.docker
             .post_json(
                 &format!("/distribution/{}/json", self.name),
@@ -113,8 +113,8 @@ impl Image {
 
 impl Images {
     impl_api_ep! {img: Image, resp
-        List -> "/images/json", models::ImageSummary
-        Prune ->  "/images/prune", models::ImagePrune200Response
+        List -> "/images/json", rs_docker_api_stubs::models::ImageSummary
+        Prune ->  "/images/prune", rs_docker_api_stubs::models::ImagePrune200Response
     }
 
     api_doc! { Image => Build
@@ -175,7 +175,7 @@ impl Images {
     api_doc! { Image => Search
     |
     /// Search for docker images by term.
-    pub async fn search<T>(&self, term: T) -> Result<models::ImageSearch200Response>
+    pub async fn search<T>(&self, term: T) -> Result<rs_docker_api_stubs::models::ImageSearch200Response>
     where
         T: AsRef<str>,
     {
@@ -261,7 +261,7 @@ impl Images {
     pub async fn clear_cache(
         &self,
         opts: &ClearCacheOpts,
-    ) -> Result<models::BuildPrune200Response> {
+    ) -> Result<rs_docker_api_stubs::models::BuildPrune200Response> {
         self.docker
             .post_json(
                 construct_ep("/build/prune", opts.serialize()),

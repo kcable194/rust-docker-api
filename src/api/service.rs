@@ -26,14 +26,14 @@ impl Service {
     }}
 
     impl_api_ep! { svc: Service, resp
-        Inspect -> &format!("/services/{}", svc.name), models::Service
-        Delete -> &format!("/services/{}", svc.name), models::ServiceUpdateResponse
+        Inspect -> &format!("/services/{}", svc.name), rs_docker_api_stubs::models::Service
+        Delete -> &format!("/services/{}", svc.name), rs_docker_api_stubs::models::ServiceUpdateResponse
         Logs -> &format!("/services/{}/logs", svc.name), ()
     }
 }
 
 impl Services {
     impl_api_ep! { svc: Service, resp
-        List -> "/services", models::Service
+        List -> "/services", rs_docker_api_stubs::models::Service
     }
 }

@@ -14,8 +14,8 @@ impl_api_ty!(Plugin => name);
 
 impl Plugin {
     impl_api_ep! {plug: Plugin, resp
-        Inspect -> &format!("/plugins/{}/json", plug.name), models::Plugin
-        ForceDelete -> &format!("/plugins/{}", plug.name), models::Plugin
+        Inspect -> &format!("/plugins/{}/json", plug.name), rs_docker_api_stubs::models::Plugin
+        ForceDelete -> &format!("/plugins/{}", plug.name), rs_docker_api_stubs::models::Plugin
     }
 
     api_doc! { Plugin => Enable
@@ -74,6 +74,6 @@ impl Plugin {
 
 impl Plugins {
     impl_api_ep! {plug: Plugin, resp
-        List -> "/plugins", models::Plugin
+        List -> "/plugins", rs_docker_api_stubs::models::Plugin
     }
 }

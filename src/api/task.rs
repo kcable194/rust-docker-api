@@ -7,13 +7,13 @@ impl_api_ty!(Task => id);
 
 impl Task {
     impl_api_ep! { task: Task, resp
-        Inspect -> &format!("/tasks/{}", task.id), models::Task
+        Inspect -> &format!("/tasks/{}", task.id), rs_docker_api_stubs::models::Task
         Logs -> &format!("/tasks/{}/logs", task.id), ()
     }
 }
 
 impl Tasks {
     impl_api_ep! { task: Task, resp
-        List -> "/tasks", models::Task
+        List -> "/tasks", rs_docker_api_stubs::models::Task
     }
 }

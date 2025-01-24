@@ -20,7 +20,7 @@ impl Swarm {
     }
 
     impl_api_ep! {_swarm: Swarm, resp
-        Inspect -> "/swarm", models::Swarm
+        Inspect -> "/swarm", rs_docker_api_stubs::models::Swarm
     }
 
     api_doc! { Swarm => Unlockkey

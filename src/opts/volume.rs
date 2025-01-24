@@ -29,7 +29,7 @@ impl VolumeCreateOptsBuilder {
 
     impl_field!(
         /// Cluster-specific options used to create the volume.
-        cluster_spec: crate::models::ClusterVolumeSpec => "ClusterVolumeSpec"
+        cluster_spec: rs_docker_api_stubs::models::ClusterVolumeSpec => "ClusterVolumeSpec"
     );
 }
 

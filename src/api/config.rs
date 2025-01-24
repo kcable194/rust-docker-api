@@ -12,7 +12,7 @@ impl_api_ty!(Config => name);
 
 impl Config {
     impl_api_ep! { cfg: Config, resp
-        Inspect -> &format!("/configs/{}", cfg.name), models::Config
+        Inspect -> &format!("/configs/{}", cfg.name), rs_docker_api_stubs::models::Config
         Delete -> &format!("/configs/{}", cfg.name), ()
     }
 
@@ -21,7 +21,7 @@ impl Config {
 
 impl Configs {
     impl_api_ep! { __: Config, resp
-        List -> "/configs", models::Config
+        List -> "/configs", rs_docker_api_stubs::models::Config
     }
 
     api_doc! {

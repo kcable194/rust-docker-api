@@ -14,7 +14,7 @@ impl_api_ty!(Network => id);
 
 impl Network {
     impl_api_ep! { net: Network, resp
-        Inspect -> &format!("/networks/{}", net.id), models::Network
+        Inspect -> &format!("/networks/{}", net.id), rs_docker_api_stubs::models::Network
         Delete -> &format!("/networks/{}", net.id), ()
     }
 
@@ -49,8 +49,8 @@ impl Network {
 
 impl Networks {
     impl_api_ep! { __: Network, resp
-        List -> "/networks", models::Network
-        Prune -> "/networks/prune", models::NetworkPrune200Response
+        List -> "/networks", rs_docker_api_stubs::models::Network
+        Prune -> "/networks/prune", rs_docker_api_stubs::models::NetworkPrune200Response
     }
 
     api_doc! { Network => Create
@@ -65,7 +65,7 @@ impl Networks {
                 Headers::none(),
             )
             .await
-            .map(|resp: models::NetworkCreate201Response| {
+            .map(|resp: rs_docker_api_stubs::models::NetworkCreate201Response| {
                 Network::new(self.docker.clone(), resp.id.unwrap_or_default())
             })
     }}

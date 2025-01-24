@@ -1,14 +1,14 @@
 [package]
-name = "docker-api-stubs"
+name = "rs-docker-api-stubs"
 version = "0.6.0"
 authors = [ "Wojciech Kępka <wojciech@wkepka.dev>" ]
 description = "Generated Docker API swagger stubs for use in docker-api"
 license = "MIT"
 edition = "2021"
 
-documentation = "https://docs.rs/docker-api-stubs"
-homepage = "https://github.com/vv9k/docker-api-rs"
-repository = "https://github.com/vv9k/docker-api-rs"
+#documentation = "https://docs.rs/docker-api-stubs"
+#homepage = "https://github.com/vv9k/docker-api-rs"
+#repository = "https://github.com/vv9k/docker-api-rs"
 keywords = ["docker", "api", "stubs", "models"]
 
 [dependencies]

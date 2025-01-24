@@ -11,7 +11,7 @@ impl_api_ty!(Secret => name);
 
 impl Secret {
     impl_api_ep! { secret: Secret, resp
-        Inspect -> &format!("/secrets/{}", secret.name), models::Secret
+        Inspect -> &format!("/secrets/{}", secret.name), rs_docker_api_stubs::models::Secret
         Delete -> &format!("/secrets/{}", secret.name), ()
     }
     // TODO: add Secret::update
@@ -19,7 +19,7 @@ impl Secret {
 
 impl Secrets {
     impl_api_ep! { __: Secret, resp
-        List -> "/secrets", models::Secret
+        List -> "/secrets", rs_docker_api_stubs::models::Secret
     }
 
     api_doc! { Secret => Create

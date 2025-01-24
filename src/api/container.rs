@@ -23,7 +23,7 @@ impl_api_ty!(Container => id);
 
 impl Container {
     impl_api_ep! {container: Container, resp
-        Inspect -> &format!("/containers/{}/json", container.id), models::ContainerInspect200Response
+        Inspect -> &format!("/containers/{}/json", container.id), rs_docker_api_stubs::models::ContainerInspect200Response
         Logs -> &format!("/containers/{}/logs", container.id), ()
         DeleteWithOpts -> &format!("/containers/{}", container.id), String, delete
     }
@@ -32,7 +32,7 @@ impl Container {
     |
     /// Returns a `top` view of information about the container process.
     /// On Unix systems, this is done by running the ps command. This endpoint is not supported on Windows.
-    pub async fn top(&self, psargs: Option<&str>) -> Result<models::ContainerTop200Response> {
+    pub async fn top(&self, psargs: Option<&str>) -> Result<rs_docker_api_stubs::models::ContainerTop200Response> {
         let mut ep = format!("/containers/{}/top", self.id);
         if let Some(ref args) = psargs {
             append_query(&mut ep, encoded_pair("ps_args", args));
@@ -65,7 +65,7 @@ impl Container {
     api_doc! { Container => Changes
     |
     /// Returns a set of changes made to the container instance.
-    pub async fn changes(&self) -> Result<Option<models::ContainerChanges200Response>> {
+    pub async fn changes(&self) -> Result<Option<rs_docker_api_stubs::models::ContainerChanges200Response>> {
         self.docker
             .get_json(&format!("/containers/{}/changes", self.id))
             .await
@@ -202,7 +202,7 @@ impl Container {
     api_doc! { Container => Wait
     |
     /// Wait until the container stops.
-    pub async fn wait(&self) -> Result<models::ContainerWaitResponse> {
+    pub async fn wait(&self) -> Result<rs_docker_api_stubs::models::ContainerWaitResponse> {
         self.docker
             .post_json(
                 format!("/containers/{}/wait", self.id),
@@ -330,7 +330,7 @@ impl Container {
     api_doc! { Image => Commit
     |
     /// Create a new image from this container
-    pub async fn commit(&self, opts: &ContainerCommitOpts, config: Option<&models::ContainerConfig>) -> Result<String> {
+    pub async fn commit(&self, opts: &ContainerCommitOpts, config: Option<&rs_docker_api_stubs::models::ContainerConfig>) -> Result<String> {
         #[derive(Deserialize)]
         struct IdStruct {
             #[serde(rename = "Id")]
@@ -361,8 +361,8 @@ impl Container {
 
 impl Containers {
     impl_api_ep! {__: Container, resp
-        List -> "/containers/json", models::ContainerSummary
-        Prune -> "/containers/prune", models::ContainerPrune200Response
+        List -> "/containers/json", rs_docker_api_stubs::models::ContainerSummary
+        Prune -> "/containers/prune", rs_docker_api_stubs::models::ContainerPrune200Response
     }
 
     api_doc! { Containers => Create
@@ -377,7 +377,7 @@ impl Containers {
         self.docker
             .post_json(&ep, Payload::Json(opts.serialize_vec()?), Headers::none())
             .await
-            .map(|resp: models::ContainerCreateResponse| {
+            .map(|resp: rs_docker_api_stubs::models::ContainerCreateResponse| {
                 Container::new(self.docker.clone(), resp.id)
             })
     }}

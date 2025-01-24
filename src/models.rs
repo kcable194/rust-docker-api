@@ -1,6 +1,6 @@
 //! Generated Docker models
 
-pub use docker_api_stubs::models::*;
+pub use rs_docker_api_stubs::models::*;
 
 use crate::errors::{Error, Result};
 

@@ -116,7 +116,7 @@ impl ServiceOptsBuilder {
 
     pub fn networks<N>(mut self, networks: N) -> Self
     where
-        N: IntoIterator<Item = models::NetworkAttachmentConfig>,
+        N: IntoIterator<Item = rs_docker_api_stubs::models::NetworkAttachmentConfig>,
     {
         self.params.insert(
             "Networks",

@@ -12,14 +12,14 @@ impl Docker {
     api_doc! { System => Version
     |
     /// Returns the version of Docker that is running and various information about the system that Docker is running on.
-    pub async fn version(&self) -> Result<models::SystemVersion> {
+    pub async fn version(&self) -> Result<rs_docker_api_stubs::models::SystemVersion> {
         self.get_json("/version").await
     }}
 
     api_doc! { System => Info
     |
     /// Returns system information about Docker instance that is running
-    pub async fn info(&self) -> Result<models::SystemInfo> {
+    pub async fn info(&self) -> Result<rs_docker_api_stubs::models::SystemInfo> {
         self.get_json("/info").await
     }}
 
@@ -29,7 +29,7 @@ impl Docker {
     pub async fn ping(&self) -> Result<models::PingInfo> {
         self.get("/_ping")
             .await
-            .and_then(|resp| models::PingInfo::try_from(resp.headers()))
+            .and_then(|resp| crate::models::PingInfo::try_from(resp.headers()))
     }}
 
     api_doc! { System => Events
@@ -38,7 +38,7 @@ impl Docker {
     pub fn events<'docker>(
         &'docker self,
         opts: &EventsOpts,
-    ) -> impl Stream<Item = Result<models::EventMessage>> + Unpin + 'docker {
+    ) -> impl Stream<Item = Result<rs_docker_api_stubs::models::EventMessage>> + Unpin + 'docker {
         let ep = construct_ep("/events", opts.serialize());
         let reader = Box::pin(
             self.get_stream(ep)
@@ -58,7 +58,7 @@ impl Docker {
     api_doc! { System => DataUsage
     |
     /// Returns data usage of this Docker instance
-    pub async fn data_usage(&self, opts: &SystemDataUsageOpts) -> Result<models::SystemDataUsage200Response> {
+    pub async fn data_usage(&self, opts: &SystemDataUsageOpts) -> Result<rs_docker_api_stubs::models::SystemDataUsage200Response> {
         let ep = construct_ep("/system/df", opts.serialize());
         self.get_json(&ep).await
     }}

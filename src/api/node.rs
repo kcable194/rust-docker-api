@@ -17,7 +17,7 @@ type Void = ();
 
 impl Node {
     impl_api_ep! {node: Node, resp
-        Inspect -> &format!("/nodes/{}", node.name), models::Node
+        Inspect -> &format!("/nodes/{}", node.name), rs_docker_api_stubs::models::Node
         ForceDelete -> &format!("/nodes/{}", node.name), Void
     }
 
@@ -42,6 +42,6 @@ impl Node {
 
 impl Nodes {
     impl_api_ep! {node: Node, resp
-        List -> "/nodes", models::Node
+        List -> "/nodes", rs_docker_api_stubs::models::Node
     }
 }
