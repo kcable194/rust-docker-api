@@ -82,6 +82,18 @@ impl Container {
 
     api_doc! { Container => Stats
     |
+    /// Returns a single response of stats specific to this container instance.
+    pub async fn stats_no_stream(&self, one_shot: Option<bool>) -> Result<rs_docker_api_stubs::models::ContainerStats200Response> {
+        let one_shot_param = one_shot.unwrap_or_else(|| false);
+        let ep = format!("/containers/{}/stats?stream=false&one-shot={}", self.id, one_shot_param);
+        // if let Some(ref args) = psargs {
+        //     append_query(&mut ep, encoded_pair("ps_args", args));
+        // }
+        self.docker.get_json(&ep).await
+    }}
+
+    api_doc! { Container => Stats
+    |
     /// Returns a stream of stats specific to this container instance.
     pub fn stats(&self) -> impl Stream<Item = Result<serde_json::Value>> + Unpin + '_ {
         let codec = asynchronous_codec::LinesCodec {};

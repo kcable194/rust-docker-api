@@ -1189,7 +1189,167 @@ impl std::fmt::Display for ContainerStateStatusInlineItem {
 }
 
 /// no error
-pub type ContainerStats200Response = Value;
+// pub type ContainerStats200Response = Value;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ContainerStats200Response {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub read: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pids_stats: Option<PidsStats>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub networks: Option<HashMap<String, NetworkStats>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub memory_stats: Option<MemoryStats>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub blkio_stats: Option<BlkioStats>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cpu_stats: Option<CpuStats>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub precpu_stats: Option<CpuStats>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PidsStats {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub current: Option<u64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NetworkStats {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rx_bytes: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rx_dropped: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rx_errors: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rx_packets: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tx_bytes: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tx_dropped: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tx_errors: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tx_packets: Option<u64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MemoryStats {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stats: Option<MemoryDetailedStats>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_usage: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub usage: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub failcnt: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub limit: Option<u64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MemoryDetailedStats {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_pgmajfault: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cache: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mapped_file: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_inactive_file: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pgpgout: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rss: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_mapped_file: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub writeback: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub unevictable: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pgpgin: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_unevictable: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pgmajfault: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_rss: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_rss_huge: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_writeback: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_inactive_anon: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rss_huge: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub hierarchical_memory_limit: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_pgfault: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_active_file: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub active_anon: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_active_anon: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_pgpgout: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_cache: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub inactive_anon: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub active_file: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pgfault: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub inactive_file: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_pgpgin: Option<u64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BlkioStats {
+    // Add fields here if needed
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CpuStats {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cpu_usage: Option<CpuUsage>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub system_cpu_usage: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub online_cpus: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub throttling_data: Option<ThrottlingData>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CpuUsage {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub percpu_usage: Option<Vec<u64>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub usage_in_usermode: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_usage: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub usage_in_kernelmode: Option<u64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ThrottlingData {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub periods: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub throttled_periods: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub throttled_time: Option<u64>,
+}
+
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ContainerSummary {
