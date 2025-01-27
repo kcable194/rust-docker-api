@@ -1,6 +1,6 @@
 [package]
 name = "rs-docker-api-rs"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Wojciech Kępka <wojciech@wkepka.dev"]
 description = "Interface to Docker API"
 #documentation = "https://docs.rs/docker-api"
@@ -17,7 +17,7 @@ containers-api = "0.9"
 #containers-api = { git = "https://github.com/vv9k/containers-api" }
 
 #rs-docker-api-stubs = "0.5"
-rs-docker-api-stubs = { path = "rs-docker-api-stubs/lib", version = "0.7.0" }
+rs-docker-api-stubs = { path = "rs-docker-api-stubs/lib", version = "0.8.0" }
 
 log = "0.4"
 paste = "1"
