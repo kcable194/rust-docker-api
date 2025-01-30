@@ -12,7 +12,7 @@ impl_api_ty!(Volume => name);
 
 impl Volume {
     impl_api_ep! {vol: Volume, resp
-        Inspect -> &format!("/volumes/{}", vol.name), rs_docker_api_stubs::models::Volume
+        Inspect -> &format!("/volumes/{}", vol.name), models::Volume
         Delete -> &format!("/volumes/{}", vol.name), ()
     }
 
@@ -28,13 +28,13 @@ impl Volume {
 
 impl Volumes {
     impl_api_ep! {__: Volume, resp
-        Prune -> "/volumes/prune", rs_docker_api_stubs::models::VolumePrune200Response
+        Prune -> "/volumes/prune", models::VolumePrune200Response
     }
 
     api_doc! { Volume => List
     |
     /// List available volumes
-    pub async fn list(&self, opts: &VolumeListOpts) -> Result<rs_docker_api_stubs::models::VolumeListResponse> {
+    pub async fn list(&self, opts: &VolumeListOpts) -> Result<models::VolumeListResponse> {
         let ep = url::construct_ep("/volumes", opts.serialize());
         self.docker.get_json(&ep).await
     }}
@@ -42,7 +42,7 @@ impl Volumes {
     api_doc! { Volume => Create
     |
     /// Create a new volume.
-    pub async fn create(&self, opts: &VolumeCreateOpts) -> Result<rs_docker_api_stubs::models::Volume> {
+    pub async fn create(&self, opts: &VolumeCreateOpts) -> Result<models::Volume> {
         // #TODO: handle missing id and return warnings (?)
         self.docker
             .post_json(

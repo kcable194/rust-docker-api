@@ -3,7 +3,9 @@
 use std::env;
 use std::path::PathBuf;
 
-pub use docker_api::{api, conn, models, rs_docker_api_stubs::models::ImageBuildChunk, opts, Docker};
+pub use docker_api::{
+    api, conn, models, opts, rs_docker_api_stubs::models::ImageBuildChunk, Docker,
+};
 pub use futures_util::{StreamExt, TryStreamExt};
 pub use tempfile::TempDir;
 

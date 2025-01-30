@@ -1,9 +1,9 @@
-use rs_docker_api_stubs::{models::Ipam};
 use crate::{Error, Result};
 use containers_api::opts::{Filter, FilterItem};
 use containers_api::{
     impl_field, impl_filter_func, impl_map_field, impl_opts_builder, impl_str_field, impl_vec_field,
 };
+use rs_docker_api_stubs::models::Ipam;
 
 use std::{collections::HashMap, convert::AsRef};
 

@@ -41,7 +41,10 @@ impl Exec {
         Self::inspect_impl(&self.docker, self.id.as_ref()).await
     }}
 
-    async fn inspect_impl(docker: &Docker, id: &str) -> Result<rs_docker_api_stubs::models::ExecInspect200Response> {
+    async fn inspect_impl(
+        docker: &Docker,
+        id: &str,
+    ) -> Result<rs_docker_api_stubs::models::ExecInspect200Response> {
         docker.get_json(&format!("/exec/{id}/json")).await
     }
 

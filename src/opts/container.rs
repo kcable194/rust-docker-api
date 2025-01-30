@@ -1,10 +1,10 @@
-use rs_docker_api_stubs::models::{DeviceRequest, NetworkingConfig};
 use crate::opts::ImageName;
 use containers_api::opts::{Filter, FilterItem};
 use containers_api::{
     impl_field, impl_filter_func, impl_map_field, impl_opts_builder, impl_str_enum_field,
     impl_str_field, impl_url_bool_field, impl_url_str_field, impl_vec_field,
 };
+use rs_docker_api_stubs::models::{DeviceRequest, NetworkingConfig};
 
 use std::net::SocketAddr;
 use std::{
@@ -19,8 +19,8 @@ use std::{
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Map, Value};
 
-use crate::{Error, Result};
 use crate::models::Labels;
+use crate::{Error, Result};
 
 pub enum Health {
     Starting,
